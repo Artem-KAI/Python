@@ -21,7 +21,3 @@
 
 # print(greeting)
 # print(f"Is {Artem.name} an adult? {'Yes' if is_adult else 'No'}")
-
-import random
-
-print(type(random()))

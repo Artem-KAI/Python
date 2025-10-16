@@ -11,7 +11,7 @@ epochs = 100
 
 # hidden_size = 10      
 
-# 25 входів для кожної літери
+ 
 letters = {
     "А": [
         0,1,1,1,0,
@@ -43,7 +43,7 @@ letters = {
     ]
 }
 
-# One-hot кодування міток
+ 
 label_encoding = {
     "А": [1, 0, 0, 0],
     "Р": [0, 1, 0, 0],
@@ -93,7 +93,7 @@ def train_mlp(X, Y, method="reinforcement"):
 
             error = y - final_output
 
-            # Backward pass (тільки для reinforcement або alpha методів)
+            # Backward pass тільки для reinforcement або alpha методів 
             if method == "reinforcement":
                 for j in range(output_size):
                     if error[j] != 0:
@@ -101,7 +101,7 @@ def train_mlp(X, Y, method="reinforcement"):
                         output_weights[j] += delta_out * hidden_output
                         output_biases[j] += delta_out
 
-                        # Оновлення прихованих ваг (спрощено)
+                        # Оновлення прихованих ваг 
                         delta_hidden = sigmoid_derivative(hidden_output) * (output_weights[j] * error[j])
                         hidden_weights += learning_rate * np.outer(delta_hidden, x)
                         hidden_biases += learning_rate * delta_hidden
@@ -109,7 +109,7 @@ def train_mlp(X, Y, method="reinforcement"):
             elif method == "alpha":
                 for j in range(output_size):
                     if np.array_equal(final_output, y):
-                        output_weights[j] += alpha * hidden_output
+                        output_weights[j] += alpha * hidden_output  
                         output_biases[j] += alpha
                     else:
                         delta_out = learning_rate * error[j]
